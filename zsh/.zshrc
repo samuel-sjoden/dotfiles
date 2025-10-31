@@ -21,7 +21,9 @@ source $DOTFILES/zsh/plugins/zsh-bd/bd.zsh
 # +---------+
 # | HISTORY |
 # +---------+
-
+HISTFILE=$DOTFILES/zsh/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
 setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format.
 setopt SHARE_HISTORY             # Share history between all sessions.
 setopt HIST_EXPIRE_DUPS_FIRST    # Expire a duplicate event first when trimming history.
@@ -39,7 +41,23 @@ _comp_options+=(globdots) # With hidden files
 source $DOTFILES/zsh/completion.zsh
 source $DOTFILES/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-
 #Prompt stuff
 source $DOTFILES/zsh/themes/purification.zsh
+
+# Disable automatic prompt modification by Conda
+export CONDA_CHANGEPS1=false
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/samuel/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/samuel/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/samuel/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/samuel/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 

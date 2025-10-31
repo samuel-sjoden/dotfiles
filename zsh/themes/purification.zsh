@@ -23,7 +23,6 @@
 # Might be faster using ripgrep too
 git_prompt_status() {
   local INDEX STATUS
-
   INDEX=$(command git status --porcelain -b 2> /dev/null)
 
   STATUS=""
@@ -105,6 +104,18 @@ prompt_purity_precmd() {
     print -P ''
 }
 
+conda_prompt_info() {
+    if [[ -n "$CONDA_DEFAULT_ENV" ]]; then
+        # Yellow for base, green for other envs
+        if [[ "$CONDA_DEFAULT_ENV" == "base" ]]; then
+            echo "%F{blue} $CONDA_DEFAULT_ENV%f "
+        else
+            echo "%F{green} $CONDA_DEFAULT_ENV%f "
+        fi
+    fi
+}
+
+
 prompt_purification_setup() {
     # Display git branch
 
@@ -127,7 +138,9 @@ prompt_purification_setup() {
 
     prompt_git_branch
     RPROMPT='$(prompt_git_info) $(git_prompt_status)'
-    PROMPT=$'%F{white}%~ %B%F{blue}>%f%b '
+    # PROMPT=$'%F{white}%~ %B%F{blue}>%f%b '
+    PROMPT='$(conda_prompt_info)%F{magenta}%n%f %F{white}%~ %B%F{blue}>%f%b '
+
 }
 
 prompt_purification_setup
