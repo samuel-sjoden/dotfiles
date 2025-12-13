@@ -139,7 +139,7 @@ prompt_purification_setup() {
     prompt_git_branch
     RPROMPT='$(prompt_git_info) $(git_prompt_status)'
     # PROMPT=$'%F{white}%~ %B%F{blue}>%f%b '
-    PROMPT='$(conda_prompt_info)%F{magenta}%n%f %F{white}%~ %B%F{blue}>%f%b '
+    PROMPT='$(conda_prompt_info)%F{magenta}%n%f %F{white}%~ %B%F{cyan}>%f%b '
 
 }
 

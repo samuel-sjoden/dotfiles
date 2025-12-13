@@ -44,20 +44,34 @@ source $DOTFILES/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #Prompt stuff
 source $DOTFILES/zsh/themes/purification.zsh
 
+detach() { nohup "$@" >/dev/null 2>&1 & disown; }
+
 # Disable automatic prompt modification by Conda
 export CONDA_CHANGEPS1=false
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/samuel/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/samuel/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/samuel/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/samuel/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
+# __conda_setup="$('/home/samuel/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/home/samuel/miniconda3/etc/profile.d/conda.sh" ]; then
+#         . "/home/samuel/miniconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/home/samuel/miniconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
 # <<< conda initialize <<<
-
+# export ONSHAPE_API=https://cad.onshape.com
+# export ONSHAPE_ACCESS_KEY=on_w0rZuoSHxgDF70zzmcKf9
+# export ONSHAPE_SECRET_KEY=bgwOIRjabqFMdERF7UD8tpumVEKwycdHxqlBGyoRHvbJqgEH
+alias get_idf='. /home/samuel/esp/esp-idf/export.sh'
+alias windows="VBoxManage startvm Windows\ 11"
+alias kill_kvm="sudo modprobe -r kvm_intel"
+alias jl='jupyter-lab --notebook-dir="$PWD"'
+alias jn='jupyter-notebook --notebook-dir="$PWD"'
+alias sourcerc='source ~/.zshrc'
+alias modrc='$EDITOR ~/.zshrc'
+alias conda-init='source ~/miniconda3/etc/profile.d/conda.sh'
+alias n='$EDITOR'
+alias ff='detach firefox'
